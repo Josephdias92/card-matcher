@@ -12,23 +12,24 @@ import EmojiType from '@/models/EmojiType';
 @Component({
   components: {
     Board,
-  }
+  },
 })
 export default class Home extends Vue {
-  private allEmojis : string[] = ['👳🏼', '🐼', '🌓', '🌮', '🍼', '🏉', '🏠', '☎️', '💊', '💝', '🇮🇳 ', '🚲', '🛳', '🎱', '🎹', '🤽🏻‍♂️'];
-  private emojis : EmojiType[] = [];
-  private easyGame : number = 16;
+  private allEmojis: string[] = ['👳🏼', '🐼', '🌓', '🌮', '🍼', '🏉',
+   '🏠', '☎️', '💊', '💝', '🇮🇳 ', '🚲', '🛳', '🎱', '🎹', '🤽🏻‍♂️'];
+  private emojis: EmojiType[] = [];
+  private easyGame: number = 16;
   constructor() {
     super();
-    const gameEmojis = this.allEmojis.slice(0, this.easyGame/2);
+    const gameEmojis = this.allEmojis.slice(0, this.easyGame / 2);
     const gameEmojisRepeated = [...gameEmojis, ...gameEmojis];
-    const gameEmojisRepeatedType : EmojiType[]  = gameEmojisRepeated.map((emoji)=> {
+    const gameEmojisRepeatedType: EmojiType[]  = gameEmojisRepeated.map((emoji) => {
       return {emoji, opened: false, matched: false};
     });
     this.emojis = this.shuffleEmojis(gameEmojisRepeatedType);
   }
 
-  private shuffleEmojis(emojis : EmojiType[]) : EmojiType[] {
+  private shuffleEmojis(emojis: EmojiType[]): EmojiType[] {
     for (let i = emojis.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         const temp = emojis[i];

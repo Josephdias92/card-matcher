@@ -16,15 +16,17 @@ import EmojiType from '@/models/EmojiType';
 @Component
 export default class Board extends Vue {
   @Prop() private emojis!: EmojiType[];
-  prevEmoji : EmojiType;
-  openEmoji(emoji : EmojiType) : void {
+
+  private prevEmoji!: EmojiType | null;
+
+  public openEmoji(emoji: EmojiType): void {
     if (!emoji.matched) {
       emoji.opened = !emoji.opened;
       this.match(emoji);
     }
   }
 
-  private match(emoji) : boolean {
+  private match(emoji: EmojiType): void {
     setTimeout(() => {
       if (!this.prevEmoji) {
         this.prevEmoji = emoji;
