@@ -1,6 +1,9 @@
 # Card Matcher
 Emoji matcher in Vue 
 
-## Features
-- [ ] Level - Pending
-- [ ] Game Score - Pending
+## Features 
+### Todo
+- [ ] Level
+- [ ] Game Score
+- [ ] Store Score in Indexdb
+- [ ] Pwa Icon for Diffient Screen
