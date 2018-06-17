@@ -3,7 +3,7 @@
     <div class="card-container" v-for="emoji in emojis">
       <div v-on:click="openEmoji(emoji)" v-bind:class="{ opened: emoji.opened, matched: emoji.matched}" class="card">
         <div class="side back emoji">{{ emoji.emoji }}</div>
-        <div class="side ">Open</div>
+        <div class="side front">Flip</div>
       </div>
     </div>
   </div>
@@ -20,8 +20,8 @@ export default class Board extends Vue {
   private prevEmoji!: EmojiType | null;
 
   public openEmoji(emoji: EmojiType): void {
-    if (!emoji.matched) {
-      emoji.opened = !emoji.opened;
+    if (!emoji.matched && !emoji.opened) {
+      emoji.opened = true;
       this.match(emoji);
     }
   }
@@ -50,6 +50,10 @@ export default class Board extends Vue {
     width : 400px;
     justify-content: center;
     align-items: center;
+    border-top: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+
+    box-sizing: content-box;
   }
   .matched {
     .emoji {
@@ -67,6 +71,7 @@ export default class Board extends Vue {
       font-size: 60px;
     }
     .side {
+      user-select: none;
       backface-visibility: hidden;
       height: 100%;
       position: absolute;
@@ -74,7 +79,11 @@ export default class Board extends Vue {
       width: 100%;
       vertical-align: middle;
       line-height: 100px;
-      border: 1px solid #ddd;
+    }
+    .front {
+      font-size: 20px;
+      font-family: sans-serif;
+      color: #c3c3c3;
     }
     .back {
       text-align: center;
@@ -85,10 +94,13 @@ export default class Board extends Vue {
     }
   }
   .card-container {
-      height: 100px;
-      width: 100px;
-      cursor: pointer;
-      perspective: 600;
-      position: relative;
+    box-sizing : border-box;
+    height: 100px;
+    width: 100px;
+    cursor: pointer;
+    perspective: 600;
+    position: relative;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
   }
 </style>
